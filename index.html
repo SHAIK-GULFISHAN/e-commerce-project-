@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopZilla Pro | Advanced E-Commerce</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo" onclick="window.location.reload()">ShopZilla<span>.in</span></div>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Search for products (e.g. iPhone, Nike, Watch)...">
+                <button class="search-btn">🔍</button>
+            </div>
+
+            <div class="nav-actions">
+              <div class="user-profile">Hello, Sign in</div>
+                <div class="cart-btn" onclick="openModal('cartModal')">
+                    <span class="cart-icon">🛒</span>
+                    <span class="badge" id="cartCount">0</span>
+                    <span class="cart-label">Cart</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="controls-bar">
+        <div class="filter-group">
+            <label>Category:</label>
+            <select id="categoryFilter" onchange="filterProducts()">
+                <option value="all">All Categories</option>
+                <option value="tech">Electronics</option>
+                <option value="fashion">Fashion</option>
+                <option value="home">Home & Living</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Sort By:</label>
+            <select id="sortFilter" onchange="sortProducts()">
+                <option value="default">Relevance</option>
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
+            </select>
+        </div>
+    </div>
+
+    <main class="main-layout">
+        <section class="product-grid" id="productGrid"></section>
+    </main>
+
+    <div id="cartModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Shopping Cart</h2>
+                <span class="close-btn" onclick="closeModal('cartModal')">&times;</span>
+            </div>
+            <div id="cartItems" class="cart-items-container">
+                </div>
+            <div class="cart-summary">
+                <div class="total-row">
+                    <span>Total Amount:</span>
+                    <span id="totalAmount">₹0</span>
+                </div>
+                <button class="checkout-btn" onclick="startCheckout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="paymentModal" class="modal-overlay">
+        <div class="modal-content payment-box">
+            <h2>Secure Payment Gateway</h2>
+            <p>Order Total: <strong id="payTotal"></strong></p>
+            <form onsubmit="handlePayment(event)">
+                <input type="text" placeholder="Card Number" class="pay-input" required maxlength="16" pattern="\d*">
+                <div class="input-row">
+                    <input type="text" placeholder="MM/YY" class="pay-input" required maxlength="5">
+                    <input type="password" placeholder="CVV" class="pay-input" required maxlength="3">
+                </div>
+                <button type="submit" id="payButton" class="confirm-pay-btn">Confirm Payment</button>
+            </form>
+            <button class="cancel-link" onclick="closeModal('paymentModal')" style="background:none; border:none; color:grey; cursor:pointer; width:100%; margin-top:10px;">Cancel Transaction</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
